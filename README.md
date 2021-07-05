@@ -63,4 +63,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](https://github.com/moise10r/Awesome_Book/blob/feature/LICENSE.md) licensed.
+This project is [MIT](https://github.com/moise10r/Awesome_Book/blob/feature/LICENSE) licensed.
