@@ -4,10 +4,25 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="main.css">
   <title>Awesome Book</title>
 </head>
 <body>
-  
+    <h1 id="title">Awesome Books</h1>
+    <fieldset>
+      <legend>
+        New Book
+      </legend>
+      <input type="text" id="inpAuthor" placeholder="Enter author name">
+      <input type="text" id="inpTitle" placeholder="Enter Book tilte">
+      <button type="button" id="btnInsert">Add Book</button>
+    </fieldset>
+    <fieldset>
+      <legend>
+        Book list
+      </legend>
+      <div id="lsOutput"></div>
+    </fieldset>
 <script src="./app.js"></script>
 </body>
 </html>
