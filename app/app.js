@@ -10,8 +10,6 @@ btnInsert.onclick = function () {
 	const author = inpAuthor.value;
 	const title = inpTitle.value;
 
-	console.log(author, title);
-
 	if (author && title) {
 		let newBook = { author: author, title: title };
 		bookList.push(newBook);
