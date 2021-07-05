@@ -18,11 +18,17 @@ btnInsert.onclick = function () {
 	}
 };
 
+function removeBook(val) {
+	const book = bookList.filter((data, i) => i !== val)
+	localStorage.setItem('Books', JSON.stringify(book));
+	location.reload();
+};
+
 console.log(bookList);
 for (let i = 0; i < bookList.length; i++) {
 	const book = bookList[i];
 	lsOutput.innerHTML += `
-  <button id="delBtn">Delete</button>
+  <button id="delBtn" onclick="removeBook(${i})">Delete</button>
   ${'  '}
   ${book.author}:
   ${book.title}
