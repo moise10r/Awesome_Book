@@ -1,11 +1,12 @@
+/* eslint-disable no-alert */
 /* eslint-disable max-classes-per-file */
-/* eslint-disable no-restricted-globals */
-const inpAuthor = document.getElementById("inpAuthor");
-const inpTitle = document.getElementById("inpTitle");
-const btnInsert = document.getElementById("btnInsert");
-const lsOutput = document.getElementById("lsOutput");
+// const inpAuthor = document.getElementById("inpAuthor");
+// const inpTitle = document.getElementById("inpTitle");
 
-const bookList = JSON.parse(localStorage.getItem("Books")) || [];
+// const btnInsert = document.getElementById("btnInsert");
+const lsOutput = document.getElementById('lsOutput');
+
+// const bookList = JSON.parse(localStorage.getItem("Books")) || [];
 
 // btnInsert.onclick = () => {
 //   const author = inpAuthor.value;
@@ -55,26 +56,41 @@ class UI {
       new Book('J.R.Tolkin', 'L.O.T.R'),
       new Book('J.R.Tolkin', 'L.O.T.R II'),
     ];
-    bookList.forEach((book) => UI.addBookToList(book));
+    bookList.forEach((book, i) => UI.addBookToList(book, i));
   }
 
-  static addBookToList(book) {
+  static addBookToList(book, i) {
     lsOutput.innerHTML += `
-      <button id="delBtn" onclick="removeBook()">Delete</button> 
+      <button id="${i}">Delete</button> 
       ${book.author}:
       ${book.title}
       </br>
     `;
   }
+
+  static deleteBook(id) {
+    delete this.bookList[id];
+  }
 }
 
 document.addEventListener('submit', (e) => {
   e.preventDefault();
-  const author = e.target.inpAuthor.value.trim();
-  const title = e.target.inpTitle.value.trim();
+  if (e.target.inpAuthor.value === '' || e.target.inpTitle.value === '') {
+    alert('Fields not supposed to be empty!');
+  } else {
+    const author = e.target.inpAuthor.value.trim();
+    const title = e.target.inpTitle.value.trim();
 
-  console.log(author, title);
+    const newBook = new Book(author, title);
+    UI.addBookToList(newBook);
+    e.target.reset();
+  }
 });
+
+lsOutput.addEventListener('click', (e) => {
+  console.log(e.target.id);
+  UI.deleteBook(toInteger(e.target.id));
+})
 
 UI.displayBook();
 // Local storage to store the book
