@@ -50,26 +50,48 @@ class Book {
   }
 }
 
+class Store {
+  static getBooks() {
+    let books;
+    if (localStorage.getItem('books') === null) {
+      books = [new Book('J.R.Tolkin', 'L.O.T.R')];
+    } else {
+      books = JSON.parse(localStorage.getItem('books'));
+    }
+
+    return books;
+  }
+
+  static addBook(book) {
+    const books = Store.getBooks();
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books));
+  }
+
+  static removeBook(id) {
+    const books = Store.getBooks();
+    books.splice(id, 1);
+  }
+}
+
 class UI {
   static displayBook() {
-    const bookList = JSON.parse(localStorage.getItem('Books')) || [
-      new Book('J.R.Tolkin', 'L.O.T.R'),
-      new Book('J.R.Tolkin', 'L.O.T.R II'),
-    ];
+    const bookList = Store.getBooks();
     bookList.forEach((book, i) => UI.addBookToList(book, i));
   }
 
   static addBookToList(book, i) {
     lsOutput.innerHTML += `
-      <button id="${i}">Delete</button> 
+    <div id="${i}">
+      <button >Delete</button> 
       ${book.author}:
       ${book.title}
-      </br>
+    </div>
     `;
   }
 
   static deleteBook(id) {
-    delete this.bookList[id];
+    console.log(id);
   }
 }
 
@@ -88,13 +110,8 @@ document.addEventListener('submit', (e) => {
 });
 
 lsOutput.addEventListener('click', (e) => {
-  console.log(e.target.id);
-  UI.deleteBook(toInteger(e.target.id));
-})
+  console.log(e.target.parentElement);
+  UI.deleteBook(parseInt(e.target.id, 10));
+});
 
 UI.displayBook();
-// Local storage to store the book
-// Display a book
-// Remove a book
-// Add a book
-// UI operations
