@@ -51,9 +51,6 @@ class Book {
     this.title = title;
   }
 }
-
-console.log(localStorage.getItem.length);
-
 class Store {
   static getBooks() {
     let books;
@@ -85,7 +82,6 @@ class UI {
   }
 
   static addBookToList(book) {
-    console.log(book);
     lsOutput.innerHTML += `
     <div id="${book.id}">
       <button >Delete</button> 
@@ -96,7 +92,8 @@ class UI {
   }
 
   static deleteBook(id) {
-    console.log(id);
+    const el = document.getElementById(`${id}`);
+    el.parentNode.removeChild(el);
   }
 }
 
@@ -115,8 +112,7 @@ document.addEventListener('submit', (e) => {
 });
 
 lsOutput.addEventListener('click', (e) => {
-  console.log(e.target.parentElement);
-  UI.deleteBook(parseInt(e.target.id, 10));
+  UI.deleteBook(e.target.parentElement.id);
 });
 
 UI.displayBook();
