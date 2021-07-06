@@ -43,18 +43,22 @@ const lsOutput = document.getElementById('lsOutput');
 // }
 
 // Book class Author and title
+
 class Book {
   constructor(author, title) {
+    this.id = new Date().valueOf();
     this.author = author;
     this.title = title;
   }
 }
 
+console.log(localStorage.getItem.length);
+
 class Store {
   static getBooks() {
     let books;
     if (localStorage.getItem('books') === null) {
-      books = [new Book('J.R.Tolkin', 'L.O.T.R')];
+      books = [];
     } else {
       books = JSON.parse(localStorage.getItem('books'));
     }
@@ -77,12 +81,13 @@ class Store {
 class UI {
   static displayBook() {
     const bookList = Store.getBooks();
-    bookList.forEach((book, i) => UI.addBookToList(book, i));
+    bookList.forEach((book) => UI.addBookToList(book));
   }
 
-  static addBookToList(book, i) {
+  static addBookToList(book) {
+    console.log(book);
     lsOutput.innerHTML += `
-    <div id="${i}">
+    <div id="${book.id}">
       <button >Delete</button> 
       ${book.author}:
       ${book.title}
