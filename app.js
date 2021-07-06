@@ -1,11 +1,11 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable no-restricted-globals */
-const inpAuthor = document.getElementById('inpAuthor');
-const inpTitle = document.getElementById('inpTitle');
-const btnInsert = document.getElementById('btnInsert');
-const lsOutput = document.getElementById('lsOutput');
+const inpAuthor = document.getElementById("inpAuthor");
+const inpTitle = document.getElementById("inpTitle");
+const btnInsert = document.getElementById("btnInsert");
+const lsOutput = document.getElementById("lsOutput");
 
-const bookList = JSON.parse(localStorage.getItem('Books')) || [];
+const bookList = JSON.parse(localStorage.getItem("Books")) || [];
 
 // btnInsert.onclick = () => {
 //   const author = inpAuthor.value;
@@ -43,26 +43,40 @@ const bookList = JSON.parse(localStorage.getItem('Books')) || [];
 
 // Book class Author and title
 class Book {
-	constructor(author, title) {
-		this.author = author;
-		this.title = title;
-	}
+  constructor(author, title) {
+    this.author = author;
+    this.title = title;
+  }
 }
 
 class UI {
-	static displayBook() {
-		const bookList = JSON.parse(localStorage.getItem('Books')) || [
-			new Book('J.R.Tolkin', 'L.O.T.R'),
-			new Book('J.R.Tolkin', 'L.O.T.R II'),
-		];
-		bookList.forEach((book) => UI.addBookToList(book));
-	}
+  static displayBook() {
+    const bookList = JSON.parse(localStorage.getItem('Books')) || [
+      new Book('J.R.Tolkin', 'L.O.T.R'),
+      new Book('J.R.Tolkin', 'L.O.T.R II'),
+    ];
+    bookList.forEach((book) => UI.addBookToList(book));
+  }
 
-	static addBookToList() {}
+  static addBookToList(book) {
+    lsOutput.innerHTML += `
+      <button id="delBtn" onclick="removeBook()">Delete</button> 
+      ${book.author}:
+      ${book.title}
+      </br>
+    `;
+  }
 }
 
-const ui = UI.displayBook();
-console.log(ui);
+document.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const author = e.target.inpAuthor.value.trim();
+  const title = e.target.inpTitle.value.trim();
+
+  console.log(author, title);
+});
+
+UI.displayBook();
 // Local storage to store the book
 // Display a book
 // Remove a book
