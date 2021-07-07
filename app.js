@@ -114,6 +114,10 @@ const app = new Screen();
 app.render();
 
 document.querySelector('#lsOutput').addEventListener('click', (e) => {
-  UI.deleteBook(e.target.parentElement.id);
+  const isButton = e.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
   Store.removeBook(e.target.parentElement.id);
+  UI.deleteBook(e.target.parentElement.id);
 });
