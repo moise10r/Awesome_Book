@@ -4,27 +4,12 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://unpkg.com/@primer/css@16.0.0/dist/primer.css" rel="stylesheet" />
   <link rel="stylesheet" href="main.css">
   <title>Awesome Book</title>
 </head>
-<body>
-    <h1 id="title">Awesome Books</h1>
-    <fieldset>
-      <legend>
-        Book list
-      </legend>
-      <div id="lsOutput"></div>
-    </fieldset>
-    <form >
-      <fieldset>
-        <legend>
-          New Book
-        </legend>
-        <input type="text" id="inpAuthor" placeholder="Enter author name">
-        <input type="text" id="inpTitle" placeholder="Enter Book tilte">
-        <button type="submit" id="btnInsert">Add Book</button>
-      </fieldset>
-    </form>
-<script src="./app.js"></script>
-</body>
+  <body>
+    <div id="app"></div>
+  <script src="./app.js"></script>
+  </body>
 </html>
