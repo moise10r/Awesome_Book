@@ -18,10 +18,13 @@ This project is 1. one in series where we apply pair programming and implement u
     4. The correct book is removed from the collection.
     5. The correct book disappears from the page.
 6. Make sure that data is preserved in the browser's memory by using localStorage.
+7. Refactor code by using JS Classes
+8. Implement CSS framework ('Primer')
 
 ## Built With
 
 - Javascript
+- Primer CSS
 
 ## Live Demo
 
