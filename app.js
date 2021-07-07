@@ -1,7 +1,7 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable no-alert */
 /* eslint-disable max-classes-per-file */
 const lsOutput = document.getElementById('lsOutput');
-
 class Book {
   constructor(author, title) {
     this.id = new Date().valueOf();
@@ -57,6 +57,28 @@ class UI {
   }
 }
 
+class Screen {
+  constructor() {
+    this.app = document.querySelector('#app');
+    this.app.classList.add('Layout');
+
+    this.header = document.createElement('div');
+    this.header.classList.add('Header');
+    this.header.innerHTML = `
+    <div class="Header-item">
+      <a href="/" class="Header-link f4 d-flex flex-items-center">
+        <span>Awesome Books</span>
+      </a>
+    </div>
+    `;
+    this.app.append(this.header);
+  }
+
+  render() {
+    UI.displayBook();
+  }
+}
+
 document.addEventListener('submit', (e) => {
   e.preventDefault();
   if (e.target.inpAuthor.value === '' || e.target.inpTitle.value === '') {
@@ -77,4 +99,5 @@ lsOutput.addEventListener('click', (e) => {
   Store.removeBook(e.target.parentElement.id);
 });
 
-UI.displayBook();
+const app = new Screen();
+app.render();
