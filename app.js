@@ -86,7 +86,7 @@ class Nav {
   }
 
   toggleContent(e) {
-    document.querySelectorAll('.Box').forEach((item) => {
+    document.querySelectorAll('.ContentBox').forEach((item) => {
       item.classList.remove('active');
     });
     // add new active class
@@ -139,7 +139,7 @@ class Screen {
     this.layoutMain.classList.add('Layout-main', 'p-4');
 
     this.bookList = document.createElement('div');
-    this.bookList.classList.add('Box', 'mb-4', 'content', 'lsOutput', 'active');
+    this.bookList.classList.add('ContentBox', 'mb-4', 'content', 'lsOutput', 'active');
     this.bookList.id = 'list';
     this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
@@ -149,7 +149,7 @@ class Screen {
     </div>
     `;
     this.newBookForm = document.createElement('div');
-    this.newBookForm.classList.add('Box', 'content');
+    this.newBookForm.classList.add('ContentBox', 'content');
     this.newBookForm.id = 'newBook';
     this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
@@ -164,7 +164,7 @@ class Screen {
     `;
 
     this.contact = document.createElement('div');
-    this.contact.classList.add('Box', 'content');
+    this.contact.classList.add('ContentBox', 'content');
     this.contact.id = 'contact';
     this.contact.innerHTML = `
     <div class="Box-body">
