@@ -74,6 +74,16 @@ class Screen {
         <span>Awesome Books</span>
       </a>
     </div>
+    <div class="Header-item Header-item--full"></div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3">Book List</a>
+    </div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3">Add new</a>
+    </div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3" >Contact</a>
+    </div>
     `;
 
     this.layoutMain = document.createElement('div');
