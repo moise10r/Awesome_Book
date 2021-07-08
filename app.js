@@ -109,12 +109,12 @@ class Screen {
     </div>
     `;
 		this.newBookForm = document.createElement('div');
-		this.newBookForm.classList.add('Box');
-		this.newBookForm.innerHTML = `<div class="Box-header">
+		this.newBookForm.classList.add('mb-9');
+		this.newBookForm.innerHTML = `<div class="">
     Add New Book
     </div>
-    <div class="Box-body">
-      <form>
+    <div class=" d-flex  flex-justify-center">
+      <form class="d-flex  flex-column flex-justify-center form">
         <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
         <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
         <button class="btn btn-primary"  type="submit">Add Book</button>
