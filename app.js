@@ -1,6 +1,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-alert */
 /* eslint-disable max-classes-per-file */
+
+const date = window.luxon;
+
 class Book {
   constructor(author, title) {
     this.id = new Date().valueOf();
@@ -78,9 +81,7 @@ class Nav {
   }
 
   toggleTabs(e) {
-    // remove current active classes
     this.tabs.forEach((tab) => tab.classList.remove('active'));
-    // add new active class
     e.target.classList.add('active');
   }
 
@@ -88,7 +89,6 @@ class Nav {
     document.querySelectorAll('.ContentBox').forEach((item) => {
       item.classList.remove('active');
     });
-    // add new active class
     const selector = e.target.getAttribute('data-target');
     const content = document.querySelector(selector);
     content.classList.add('active');
@@ -118,11 +118,11 @@ class Screen {
       <a class="Header-link mr-3" data-target="#contact">Contact</a>
     </div>
     `;
-
+    const now = date.DateTime.local();
     this.clock = document.createElement('div');
     this.clock.classList.add('clock');
     this.clock.innerHTML = `
-    ${Date()}
+    ${now.toFormat('ffff')}
     `;
     this.footer = document.createElement('footer');
     this.footer.classList.add(
