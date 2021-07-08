@@ -61,6 +61,22 @@ class UI {
   }
 }
 
+class Nav {
+  constructor() {
+    this.tabs = document.querySelectorAll('[data-target]');
+  }
+
+  init() {
+    console.log(this.tabs);
+    this.tabs.forEach((tab) => {
+      tab.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          console.log(e.target.dataset);
+        }
+      });
+    });
+  }
+}
 class Screen {
   constructor() {
     this.app = document.querySelector('#app');
@@ -100,7 +116,7 @@ class Screen {
     this.layoutMain.classList.add('Layout-main', 'p-4');
 
     this.bookList = document.createElement('div');
-    this.bookList.classList.add('Box', 'mb-4');
+    this.bookList.classList.add('Box', 'mb-4', 'content');
     this.bookList.id = 'lsOutput';
     this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
@@ -110,7 +126,7 @@ class Screen {
     </div>
     `;
     this.newBookForm = document.createElement('div');
-    this.newBookForm.classList.add('Box');
+    this.newBookForm.classList.add('Box', 'content');
     this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
     </div>
@@ -129,6 +145,8 @@ class Screen {
 
   render() {
     UI.displayBook();
+    const nav = new Nav();
+    nav.init();
   }
 }
 
