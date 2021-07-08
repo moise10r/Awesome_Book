@@ -1,3 +1,9 @@
+body {
+  height: 100%;
+  width:100%;
+  position: relative;
+}
+
 .content {
   padding: 10px 20px;
   border-radius: 6px;

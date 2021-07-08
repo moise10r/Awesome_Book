@@ -43,7 +43,7 @@ class UI {
 	static addBookToList(book) {
 		const lsOutput = document.querySelector('.lsOutput');
 		lsOutput.innerHTML += `
-    <div class="Box-row  d-flex flex-items-center" id="${book.id}">
+    <div class="Box-row d-flex flex-items-center" id="${book.id}">
       <div class="flex-auto">
       <span class="h3">${book.title}</span>
         <div class="text-small text-gray-light">
@@ -86,7 +86,7 @@ class Nav {
 	}
 
 	toggleContent(e) {
-		document.querySelectorAll('.Box').forEach((item) => {
+		document.querySelectorAll('.ContentBox').forEach((item) => {
 			item.classList.remove('active');
 		});
 		// add new active class
@@ -119,6 +119,11 @@ class Screen {
       <a class="Header-link mr-3" data-target="#contact">Contact</a>
     </div>
     `;
+
+		this.clock = document.createElement('div');
+		this.clock.innerHTML = `
+    ${Date()}
+    `;
 		this.footer = document.createElement('footer');
 		this.footer.classList.add(
 			'Header',
@@ -134,7 +139,14 @@ class Screen {
 		this.layoutMain.classList.add('Layout-main', 'p-4');
 
 		this.bookList = document.createElement('div');
-		this.bookList.classList.add('Box', 'mb-4', 'content', 'lsOutput', 'active');
+		this.bookList.classList.add(
+			'Box',
+			'ContentBox',
+			'mb-4',
+			'content',
+			'lsOutput',
+			'active'
+		);
 		this.bookList.id = 'list';
 		this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
@@ -144,7 +156,7 @@ class Screen {
     </div>
     `;
 		this.newBookForm = document.createElement('div');
-		this.newBookForm.classList.add('Box', 'content');
+		this.newBookForm.classList.add('ContentBox', 'content');
 		this.newBookForm.id = 'newBook';
 		this.newBookForm.innerHTML = `<div>
     <h2 class="text-center m-3">Add New Book</h2>
@@ -159,15 +171,22 @@ class Screen {
     `;
 
 		this.contact = document.createElement('div');
-		this.contact.classList.add('Box', 'content');
+		this.contact.classList.add('ContentBox', 'content');
 		this.contact.id = 'contact';
 		this.contact.innerHTML = `
-    <div class="Box-body">
-      Hello
+    <div class="Box-body d-flex flex-column flex-items-center">
+		<h2>Contact Informarion</h2>
+		<p>Do you have any question or you just want to say 'Hello!'<p/>
+		<p>You can reach out to us!</p>
+		<ul class="mb-9">
+			<li>Our email: mail@gmail.com</li>
+			<li>Our Phone number: 0043729136280 </li>
+			<li>Our address: streetname 22,84503 city, country</li>
+		</ul>
     </div>
     `;
 
-		this.app.append(this.header, this.layoutMain, this.footer);
+		this.app.append(this.header, this.clock, this.layoutMain, this.footer);
 		this.layoutMain.append(this.bookList, this.newBookForm, this.contact);
 	}
 
