@@ -20,6 +20,7 @@ This project is 1. one in series where we apply pair programming and implement u
 6. Make sure that data is preserved in the browser's memory by using localStorage.
 7. Refactor code by using JS Classes
 8. Implement CSS framework ('Primer')
+9. Add Navigation to the layout
 
 ## Built With
 
