@@ -119,6 +119,11 @@ class Screen {
       <a class="Header-link mr-3" data-target="#contact">Contact</a>
     </div>
     `;
+
+    this.clock = document.createElement('div');
+    this.clock.innerHTML = `
+    ${Date()}
+    `;
     this.footer = document.createElement('footer');
     this.footer.classList.add(
       'Header',
@@ -167,7 +172,7 @@ class Screen {
     </div>
     `;
 
-    this.app.append(this.header, this.layoutMain, this.footer);
+    this.app.append(this.header, this.clock, this.layoutMain, this.footer);
     this.layoutMain.append(this.bookList, this.newBookForm, this.contact);
   }
 
