@@ -1,4 +1,54 @@
 body {
-  margin: 0;
-  padding: 0;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.content {
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: none;
+}
+
+.content.active {
+  display: block;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.form {
+  width: 80%;
+  max-width: 400px;
+}
+
+.form input {
+  padding: 0.6rem 0.5rem;
+}
+
+#inpTitle {
+  margin: 1rem 0;
+}
+
+.form button {
+  width: 100px;
+  align-self: center;
+  margin-bottom: 5rem;
+}
+
+.Box {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.Layout-main {
+  margin-bottom: 3rem;
+}
+
+.clock {
+  text-align: end;
+  padding: 1rem 1rem;
 }

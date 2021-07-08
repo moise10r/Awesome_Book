@@ -1,6 +1,9 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable no-alert */
 /* eslint-disable max-classes-per-file */
+
+const date = window.luxon;
+
 class Book {
   constructor(author, title) {
     this.id = new Date().valueOf();
@@ -41,7 +44,7 @@ class UI {
   }
 
   static addBookToList(book) {
-    const lsOutput = document.getElementById('lsOutput');
+    const lsOutput = document.querySelector('.lsOutput');
     lsOutput.innerHTML += `
     <div class="Box-row d-flex flex-items-center" id="${book.id}">
       <div class="flex-auto">
@@ -61,6 +64,36 @@ class UI {
   }
 }
 
+class Nav {
+  constructor() {
+    this.tabs = document.querySelectorAll('[data-target]');
+  }
+
+  init() {
+    this.tabs.forEach((tab) => {
+      tab.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          this.toggleTabs(e);
+          this.toggleContent(e);
+        }
+      });
+    });
+  }
+
+  toggleTabs(e) {
+    this.tabs.forEach((tab) => tab.classList.remove('active'));
+    e.target.classList.add('active');
+  }
+
+  toggleContent(e) {
+    document.querySelectorAll('.ContentBox').forEach((item) => {
+      item.classList.remove('active');
+    });
+    const selector = e.target.getAttribute('data-target');
+    const content = document.querySelector(selector);
+    content.classList.add('active');
+  }
+}
 class Screen {
   constructor() {
     this.app = document.querySelector('#app');
@@ -70,18 +103,51 @@ class Screen {
     this.header.classList.add('Header');
     this.header.innerHTML = `
     <div class="Header-item">
-      <a href="/" class="Header-link f4 d-flex flex-items-center">
+      <a class="Header-link f4 d-flex flex-items-center active" data-target="#list">
         <span>Awesome Books</span>
       </a>
     </div>
+      <div class="Header-item Header-item--full"></div>
+      <div class="Header-item mr-0">
+        <a class="Header-link mr-3 active" data-target="#list">Book List</a>
+      </div>
+    <div class="Header-item mr-0">
+      <a class="Header-link mr-3" data-target="#newBook">Add new</a>
+    </div>
+    <div class="Header-item mr-0">
+      <a class="Header-link mr-3" data-target="#contact">Contact</a>
+    </div>
     `;
-
-    this.layoutMain = document.createElement('div');
+    const now = date.DateTime.local();
+    this.clock = document.createElement('div');
+    this.clock.classList.add('clock');
+    this.clock.innerHTML = `
+    ${now.toFormat('ffff')}
+    `;
+    this.footer = document.createElement('footer');
+    this.footer.classList.add(
+      'Header',
+      'd-flex',
+      'flex-justify-center',
+      'footer',
+    );
+    this.footer.innerHTML = `
+    <div class="Header-item">
+      <a href="#" class="Header-link">Awesome Book List</a>
+    </div>`;
+    this.layoutMain = document.createElement('main');
     this.layoutMain.classList.add('Layout-main', 'p-4');
 
     this.bookList = document.createElement('div');
-    this.bookList.classList.add('Box', 'mb-4');
-    this.bookList.id = 'lsOutput';
+    this.bookList.classList.add(
+      'Box',
+      'ContentBox',
+      'mb-4',
+      'content',
+      'lsOutput',
+      'active',
+    );
+    this.bookList.id = 'list';
     this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
       <h3 class="Box-title overflow-hidden flex-auto">
@@ -90,24 +156,44 @@ class Screen {
     </div>
     `;
     this.newBookForm = document.createElement('div');
-    this.newBookForm.classList.add('Box');
-    this.newBookForm.innerHTML = `<div class="Box-header">
-    Add New Book
-  </div>
-  <div class="Box-body">
-    <form>
-      <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
-      <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
-      <button class="btn btn-primary"  type="submit">Add Book</button>
-    </form>
-  </div>`;
+    this.newBookForm.classList.add('ContentBox', 'content');
+    this.newBookForm.id = 'newBook';
+    this.newBookForm.innerHTML = `<div>
+    <h2 class="text-center m-3">Add New Book</h2>
+    </div>
+    <div class=" d-flex  flex-justify-center">
+      <form class="d-flex  flex-column flex-justify-center form">
+        <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
+        <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
+        <button class="btn btn-primary"  type="submit">Add Book</button>
+      </form>
+    </div>
+    `;
 
-    this.app.append(this.header, this.layoutMain);
-    this.layoutMain.append(this.bookList, this.newBookForm);
+    this.contact = document.createElement('div');
+    this.contact.classList.add('ContentBox', 'content');
+    this.contact.id = 'contact';
+    this.contact.innerHTML = `
+    <div class="Box-body d-flex flex-column flex-items-center">
+      <h2>Contact Informarion</h2>
+      <p>Do you have any question or you just want to say 'Hello!'<p/>
+      <p>You can reach out to us!</p>
+      <ul class="mb-9">
+        <li>Our email: mail@gmail.com</li>
+        <li>Our Phone number: 0043729136280 </li>
+        <li>Our address: streetname 22,84503 city, country</li>
+      </ul>
+    </div>
+    `;
+
+    this.app.append(this.header, this.clock, this.layoutMain, this.footer);
+    this.layoutMain.append(this.bookList, this.newBookForm, this.contact);
   }
 
   render() {
     UI.displayBook();
+    const nav = new Nav();
+    nav.init();
   }
 }
 
@@ -123,13 +209,18 @@ document.addEventListener('submit', (e) => {
     Store.addBook(newBook);
     UI.addBookToList(newBook);
     e.target.reset();
+    document.querySelectorAll('.content').forEach((item) => {
+      item.classList.remove('active');
+    });
+    const content = document.querySelector('#list');
+    content.classList.add('active');
   }
 });
 
 const app = new Screen();
 app.render();
 
-document.querySelector('#lsOutput').addEventListener('click', (e) => {
+document.querySelector('.lsOutput').addEventListener('click', (e) => {
   const isButton = e.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
