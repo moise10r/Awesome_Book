@@ -103,14 +103,15 @@ class Screen {
     this.newBookForm.classList.add('Box');
     this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
-  </div>
-  <div class="Box-body">
-    <form>
-      <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
-      <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
-      <button class="btn btn-primary"  type="submit">Add Book</button>
-    </form>
-  </div>`;
+    </div>
+    <div class="Box-body">
+      <form>
+        <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
+        <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
+        <button class="btn btn-primary"  type="submit">Add Book</button>
+      </form>
+    </div>
+    `;
 
     this.app.append(this.header, this.layoutMain);
     this.layoutMain.append(this.bookList, this.newBookForm);
