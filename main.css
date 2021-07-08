@@ -1,14 +1,18 @@
-body {
-  margin: 0;
-  padding: 0;
-  position: relative;
+.content {
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: none;
 }
 
+.content.active {
+  display: block;
+}
+
+
 .footer {
-  width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-  left: 0;
+  width: 100%;
 }
 
 .form {
@@ -32,4 +36,8 @@ body {
 .Box {
   max-width: 70%;
   margin: 0 auto;
+}
+
+.Layout-main {
+  margin-bottom: 3rem;
 }
