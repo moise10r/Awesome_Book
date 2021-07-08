@@ -1,11 +1,16 @@
-body {
-  margin: 0;
-  padding: 0;
+.content {
+  padding: 10px 20px;
+  border-radius: 6px;
+  display: none;
 }
 
+.content.active {
+  display: block;
+}
+
+
 .footer {
-  width: 100%;
   position: absolute;
   bottom: 0;
-  left: 0;
+  width: 100%;
 }

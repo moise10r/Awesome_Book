@@ -71,20 +71,28 @@ class Nav {
       tab.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') {
           console.log(e.target.dataset.target);
+          this.toggleTabs(e);
           this.toggleContent(e);
         }
       });
     });
   }
 
+  toggleTabs(e) {
+    // remove current active classes
+    this.tabs.forEach((tab) => tab.classList.remove('active'));
+    // add new active class
+    e.target.classList.add('active');
+  }
+
   toggleContent(e) {
     document.querySelectorAll('.Box').forEach((item) => {
-      item.classList.remove('d-block');
+      item.classList.remove('active');
     });
     // add new active class
     const selector = e.target.getAttribute('data-target');
     const content = document.querySelector(selector);
-    content.classList.add('d-block');
+    content.classList.add('active');
   }
 }
 class Screen {
@@ -96,13 +104,13 @@ class Screen {
     this.header.classList.add('Header');
     this.header.innerHTML = `
     <div class="Header-item">
-      <a class="Header-link f4 d-flex flex-items-center" data-target="#list">
+      <a class="Header-link f4 d-flex flex-items-center active" data-target="#list">
         <span>Awesome Books</span>
       </a>
     </div>
       <div class="Header-item Header-item--full"></div>
       <div class="Header-item mr-0">
-        <a class="Header-link mr-3" data-target="#list">Book List</a>
+        <a class="Header-link mr-3 active" data-target="#list">Book List</a>
       </div>
     <div class="Header-item mr-0">
       <a class="Header-link mr-3" data-target="#newBook">Add new</a>
@@ -120,13 +128,13 @@ class Screen {
     );
     this.footer.innerHTML = `
     <div class="Header-item">
-      <a href="#" class="Header-link">copyright @Awesome Book</a>
+      <a href="#" class="Header-link">Awesome Book List</a>
     </div>`;
     this.layoutMain = document.createElement('main');
-    this.layoutMain.classList.add('Layout-main', 'p-4', 'd-block');
+    this.layoutMain.classList.add('Layout-main', 'p-4');
 
     this.bookList = document.createElement('div');
-    this.bookList.classList.add('Box', 'mb-4', 'content', 'lsOutput');
+    this.bookList.classList.add('Box', 'mb-4', 'content', 'lsOutput', 'active');
     this.bookList.id = 'list';
     this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
@@ -136,7 +144,7 @@ class Screen {
     </div>
     `;
     this.newBookForm = document.createElement('div');
-    this.newBookForm.classList.add('Box', 'content', 'd-none');
+    this.newBookForm.classList.add('Box', 'content');
     this.newBookForm.id = 'newBook';
     this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
@@ -150,8 +158,17 @@ class Screen {
     </div>
     `;
 
+    this.contact = document.createElement('div');
+    this.contact.classList.add('Box', 'content');
+    this.contact.id = 'contact';
+    this.contact.innerHTML = `
+    <div class="Box-body">
+      Hello
+    </div>
+    `;
+
     this.app.append(this.header, this.layoutMain, this.footer);
-    this.layoutMain.append(this.bookList, this.newBookForm);
+    this.layoutMain.append(this.bookList, this.newBookForm, this.contact);
   }
 
   render() {
@@ -173,6 +190,11 @@ document.addEventListener('submit', (e) => {
     Store.addBook(newBook);
     UI.addBookToList(newBook);
     e.target.reset();
+    document.querySelectorAll('.Box').forEach((item) => {
+      item.classList.remove('active');
+    });
+    const content = document.querySelector('#list');
+    content.classList.add('active');
   }
 });
 
