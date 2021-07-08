@@ -41,7 +41,7 @@ class UI {
   }
 
   static addBookToList(book) {
-    const lsOutput = document.getElementById('lsOutput');
+    const lsOutput = document.querySelector('.lsOutput');
     lsOutput.innerHTML += `
     <div class="Box-row d-flex flex-items-center" id="${book.id}">
       <div class="flex-auto">
@@ -67,14 +67,24 @@ class Nav {
   }
 
   init() {
-    console.log(this.tabs);
     this.tabs.forEach((tab) => {
       tab.addEventListener('click', (e) => {
         if (e.target.tagName === 'A') {
-          console.log(e.target.dataset);
+          console.log(e.target.dataset.target);
+          this.toggleContent(e);
         }
       });
     });
+  }
+
+  toggleContent(e) {
+    document.querySelectorAll('.Box').forEach((item) => {
+      item.classList.remove('d-block');
+    });
+    // add new active class
+    const selector = e.target.getAttribute('data-target');
+    const content = document.querySelector(selector);
+    content.classList.add('d-block');
   }
 }
 class Screen {
@@ -113,11 +123,11 @@ class Screen {
       <a href="#" class="Header-link">copyright @Awesome Book</a>
     </div>`;
     this.layoutMain = document.createElement('main');
-    this.layoutMain.classList.add('Layout-main', 'p-4');
+    this.layoutMain.classList.add('Layout-main', 'p-4', 'd-block');
 
     this.bookList = document.createElement('div');
-    this.bookList.classList.add('Box', 'mb-4', 'content');
-    this.bookList.id = 'lsOutput';
+    this.bookList.classList.add('Box', 'mb-4', 'content', 'lsOutput');
+    this.bookList.id = 'list';
     this.bookList.innerHTML = `
     <div class="Box-header d-flex flex-items-center">
       <h3 class="Box-title overflow-hidden flex-auto">
@@ -126,7 +136,8 @@ class Screen {
     </div>
     `;
     this.newBookForm = document.createElement('div');
-    this.newBookForm.classList.add('Box', 'content');
+    this.newBookForm.classList.add('Box', 'content', 'd-none');
+    this.newBookForm.id = 'newBook';
     this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
     </div>
@@ -168,7 +179,7 @@ document.addEventListener('submit', (e) => {
 const app = new Screen();
 app.render();
 
-document.querySelector('#lsOutput').addEventListener('click', (e) => {
+document.querySelector('.lsOutput').addEventListener('click', (e) => {
   const isButton = e.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
