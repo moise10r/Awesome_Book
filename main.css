@@ -47,3 +47,8 @@ body {
 .Layout-main {
   margin-bottom: 3rem;
 }
+
+.clock {
+  text-align: end;
+  padding: 1rem 1rem;
+}

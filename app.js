@@ -121,6 +121,7 @@ class Screen {
     `;
 
 		this.clock = document.createElement('div');
+		this.clock.classList.add('clock');
 		this.clock.innerHTML = `
     ${Date()}
     `;
