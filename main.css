@@ -26,6 +26,7 @@ body {
 .form button {
   width: 100px;
   align-self: center;
+  margin-bottom: 5rem;
 }
 
 .Box {

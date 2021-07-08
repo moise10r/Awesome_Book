@@ -126,9 +126,9 @@ class Screen {
     </div>
     `;
 		this.newBookForm = document.createElement('div');
-		this.newBookForm.classList.add('Box', 'content');
-		this.newBookForm.innerHTML = `<div class="Box-header">
-    Add New Book
+		this.newBookForm.classList.add('content');
+		this.newBookForm.innerHTML = `<div>
+    <h2 class="text-center m-3">Add New Book</h2>
     </div>
     <div class=" d-flex  flex-justify-center">
       <form class="d-flex  flex-column flex-justify-center form">
@@ -139,8 +139,28 @@ class Screen {
     </div>
     `;
 
+		this.contactSection = document.createElement('div');
+		this.contactSection.classList.add(
+			'd-flex',
+			'flex-column',
+			'flex-items-center'
+		);
+		this.contactSection.innerHTML = `<h2>Contact Informarion</h2>
+		<p>Do you have any question or you just want to say 'Hello!'<p/>
+		<p>You can reach out to us!</p>
+		<ul class="mb-9">
+			<li>Our email: mail@gmail.com</li>
+			<li>Our Phone number: 0043729136280 </li>
+			<li>Our address: streetname 22,84503 city, country</li>
+		</ul>
+		`;
+
 		this.app.append(this.header, this.layoutMain, this.footer);
-		this.layoutMain.append(this.bookList, this.newBookForm);
+		this.layoutMain.append(
+			this.bookList,
+			this.newBookForm,
+			this.contactSection
+		);
 	}
 
 	render() {
