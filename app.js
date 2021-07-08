@@ -209,7 +209,7 @@ document.addEventListener('submit', (e) => {
     Store.addBook(newBook);
     UI.addBookToList(newBook);
     e.target.reset();
-    document.querySelectorAll('.Box').forEach((item) => {
+    document.querySelectorAll('.ContentBox').forEach((item) => {
       item.classList.remove('active');
     });
     const content = document.querySelector('#list');
