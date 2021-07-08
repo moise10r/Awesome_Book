@@ -66,25 +66,24 @@ class Screen {
 		this.app = document.querySelector('#app');
 		this.app.classList.add('Layout');
 
-		this.header = document.createElement('header');
-		this.header.classList.add('Header', 'flex-justify-between');
+		this.header = document.createElement('div');
+		this.header.classList.add('Header');
 		this.header.innerHTML = `
-    <div class="Header-item ">
-        <a href="/" class="Header-link f3 d-flex flex-items-center">
-          <span>Awesome Books</span>
-        </a>
-      </div>
-      <nav class="d-flex flex-items-center">
-      <div class="Header-item">
-        <a href="#" id="list" class="Header-link">List</a>
-      </div>
-      <div class="Header-item">
-        <a href="#" id="add-new" class="Header-link">Add new</a>
-      </div>
-      <div class="Header-item">
-        <a href="#" id="contact" class="Header-link">contact</a>
-      </div>
-    </nav>
+    <div class="Header-item">
+      <a href="/" class="Header-link f4 d-flex flex-items-center">
+        <span>Awesome Books</span>
+      </a>
+    </div>
+    <div class="Header-item Header-item--full"></div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3">Book List</a>
+    </div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3">Add new</a>
+    </div>
+    <div class="Header-item mr-0">
+      <a href="#" class="Header-link mr-3" >Contact</a>
+    </div>
     `;
 		this.footer = document.createElement('footer');
 		this.footer.classList.add(
@@ -113,14 +112,15 @@ class Screen {
 		this.newBookForm.classList.add('Box');
 		this.newBookForm.innerHTML = `<div class="Box-header">
     Add New Book
-  </div>
-  <div class="Box-body">
-    <form>
-      <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
-      <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
-      <button class="btn btn-primary"  type="submit">Add Book</button>
-    </form>
-  </div>`;
+    </div>
+    <div class="Box-body">
+      <form>
+        <input class="form-control" type="text" id="inpAuthor" placeholder="Enter author name" />
+        <input class="form-control" type="text" id="inpTitle"  placeholder="Enter Book tilte" />
+        <button class="btn btn-primary"  type="submit">Add Book</button>
+      </form>
+    </div>
+    `;
 
 		this.app.append(this.header, this.layoutMain, this.footer);
 		this.layoutMain.append(this.bookList, this.newBookForm);
