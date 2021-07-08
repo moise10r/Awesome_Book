@@ -1,6 +1,6 @@
 body {
   height: 100%;
-  width:100%;
+  width: 100%;
   position: relative;
 }
 
@@ -14,7 +14,6 @@ body {
   display: block;
 }
 
-
 .footer {
   position: fixed;
   bottom: 0;
@@ -22,13 +21,14 @@ body {
 }
 
 .form {
-  width:80%;
+  width: 80%;
   max-width: 400px;
 }
 
 .form input {
-  padding: 0.6rem 0.5rem
+  padding: 0.6rem 0.5rem;
 }
+
 #inpTitle {
   margin: 1rem 0;
 }
